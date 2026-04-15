@@ -15,7 +15,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: 'stable'
-
+      - run: flutter create .
       - run: flutter pub get
       - run: flutter build web --release
 
