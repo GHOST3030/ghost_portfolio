@@ -16,7 +16,13 @@ jobs:
         with:
           flutter-version: '3.38.4'
       - run: flutter pub get
+
       - run: flutter build web --release
+
+      - run: echo "=== CHECK BUILD ==="
+      - run: ls
+      - run: ls build || true
+      - run: ls build/web || true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
