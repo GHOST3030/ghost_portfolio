@@ -24,12 +24,12 @@ class HomePage extends ConsumerWidget {
         controller: scrollCtrl,
         child: Column(
           children: [
-           // HeroSection(sectionKey: sectionKeys['hero']!),
+            HeroSection(sectionKey: sectionKeys['hero']!),
             AboutSection(sectionKey: sectionKeys['about']!),
-            // SkillsSection(sectionKey: sectionKeys['skills']!),
-            // ProjectsSection(sectionKey: sectionKeys['projects']!),
-            // ContactSection(sectionKey: sectionKeys['contact']!),
-            // const PortfolioFooter(),
+             SkillsSection(sectionKey: sectionKeys['skills']!),
+             ProjectsSection(sectionKey: sectionKeys['projects']!),
+             ContactSection(sectionKey: sectionKeys['contact']!),
+             const PortfolioFooter(),
           ],
         ),
       ),
