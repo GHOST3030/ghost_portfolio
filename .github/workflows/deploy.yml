@@ -1,4 +1,4 @@
-name: Build Flutter Web
+name: Flutter Web CI/CD
 
 on:
   push:
@@ -6,26 +6,23 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.4'
-      - run: flutter pub get
+          channel: stable
 
-      - run: flutter build web --release
+      - name: Install dependencies
+        run: flutter pub get
 
-      - run: echo "=== CHECK BUILD ==="
-      - run: ls
-      - run: ls build || true
-      - run: ls build/web || true
+      - name: Build web
+        run: flutter build web
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-build
-          path: build/web
+      - name: Deploy to Vercel
+        run: npm i -g vercel && vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
