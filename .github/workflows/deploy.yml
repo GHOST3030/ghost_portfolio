@@ -39,18 +39,38 @@ jobs:
         run: flutter build web --release
 
       # ─── 7. Deploy to Vercel (Production on main) ──────────
+# ─── 7. Deploy to Vercel (Production on main) ──────────
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        working-directory: build/web
         run: |
           npm install -g vercel
-          vercel deploy --prod \
+          mkdir -p build/web/.vercel
+          echo '{
+            "orgId":"${{ secrets.VERCEL_ORG_ID }}",
+            "projectId":"${{ secrets.VERCEL_PROJECT_ID }}"
+          }' > build/web/.vercel/project.json
+          vercel deploy build/web \
+            --prod \
             --token=${{ secrets.VERCEL_TOKEN }} \
             --yes
+
+      # ─── 8. Preview Deploy (on PR) ─────────────────────────
+      - name: Deploy Preview (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          npm install -g vercel
+          mkdir -p build/web/.vercel
+          echo '{
+            "orgId":"${{ secrets.VERCEL_ORG_ID }}",
+            "projectId":"${{ secrets.VERCEL_PROJECT_ID }}"
+          }' > build/web/.vercel/project.json
+          PREVIEW_URL=$(vercel deploy build/web \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --yes)
+          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
       # ─── 8. Preview Deploy (on PR) ─────────────────────────
       - name: Deploy Preview (PR)
         if: github.event_name == 'pull_request'
