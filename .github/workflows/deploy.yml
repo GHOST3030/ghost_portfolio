@@ -20,7 +20,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.38.4'   # ← غيّر لنسختك
-          channel: 'stable'
           cache: true                  # cache للـ pub packages
 
       # ─── 3. Install Dependencies ───────────────────────────
