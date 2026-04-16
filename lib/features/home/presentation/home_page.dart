@@ -25,11 +25,11 @@ class HomePage extends ConsumerWidget {
         child: Column(
           children: [
             HeroSection(sectionKey: sectionKeys['hero']!),
-            AboutSection(sectionKey: sectionKeys['about']!),
-            SkillsSection(sectionKey: sectionKeys['skills']!),
-            ProjectsSection(sectionKey: sectionKeys['projects']!),
-            ContactSection(sectionKey: sectionKeys['contact']!),
-            const PortfolioFooter(),
+            // AboutSection(sectionKey: sectionKeys['about']!),
+            // SkillsSection(sectionKey: sectionKeys['skills']!),
+            // ProjectsSection(sectionKey: sectionKeys['projects']!),
+            // ContactSection(sectionKey: sectionKeys['contact']!),
+            // const PortfolioFooter(),
           ],
         ),
       ),

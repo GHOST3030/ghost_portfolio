@@ -1,6 +1,6 @@
 class PortfolioData {
   static const String name = 'Ahmed Allaw';
-  static const String brandName = 'GHOST';
+  static const String brandName = 'Ahmed';
   static const String role = 'Flutter Developer';
   static const String subrole = 'Mobile Application Developer';
   static const String email = 'ahmed.allaw@example.com';
